@@ -78,3 +78,76 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-image');
+    const prevButton = document.querySelector('.prev-arrow');
+    const nextButton = document.querySelector('.next-arrow');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Auto-advance slides every 5 seconds
+    function startSlideShow() {
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startSlideShow();
+    }
+
+    // Event listeners for arrows
+    nextButton.addEventListener('click', () => {
+        nextSlide();
+        resetInterval();
+    });
+
+    prevButton.addEventListener('click', () => {
+        prevSlide();
+        resetInterval();
+    });
+
+    // Start the slideshow
+    startSlideShow();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const toggle = item.querySelector('.faq-toggle');
+        const answer = item.querySelector('.faq-answer');
+
+        question.addEventListener('click', () => {
+            const isActive = toggle.classList.contains('active');
+            
+            // Close all other answers
+            document.querySelectorAll('.faq-toggle.active').forEach(activeToggle => {
+                if (activeToggle !== toggle) {
+                    activeToggle.classList.remove('active');
+                    activeToggle.parentElement.nextElementSibling.classList.remove('active');
+                }
+            });
+
+            // Toggle current answer
+            toggle.classList.toggle('active');
+            answer.classList.toggle('active');
+        });
+    });
+});

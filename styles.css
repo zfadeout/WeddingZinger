@@ -1,11 +1,22 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url('wedding_background.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    min-height: 100vh;
 }
 
 .header {
-    background-image: url('wedding_background.webp');
     padding: 20px 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -44,11 +55,13 @@ body, html {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+
 .main-content {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 50px;
+    padding: 40px 0;
 }
 
 .left-section {
@@ -76,9 +89,19 @@ body, html {
     border-radius: 5px;
 }
 
+
+.subtagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #666;
+}
+
 .right-section img {
-    border: 10px solid black;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 10px solid azure;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 #sticky-nav {
@@ -124,9 +147,10 @@ body, html {
     font-family: 'Playfair Display', serif;
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #333;
 }
-
 .section-description {
     max-width: 800px;
     margin: 0 auto 40px;
@@ -144,18 +168,24 @@ body, html {
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .design-box:hover {
-    border-color: orange;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .design-box img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    border-radius: 5px;
     margin-bottom: 10px;
 }
+
 
 .design-box h3 {
     margin-bottom: 10px;
@@ -186,10 +216,15 @@ body, html {
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .feature-box {
     text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .feature-box img {
@@ -429,3 +464,293 @@ tbody::-webkit-scrollbar-thumb:hover {
     height: 30px;
     background-color: #777;
   }
+
+  .designs-section {
+    padding: 80px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Designs Section Styles */
+.designs-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.designs-text {
+    flex: 1;
+    text-align: center;
+    max-width: 500px;
+}
+
+.designs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.designs-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.browse-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #8B4513;
+    color: beige;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.browse-button:hover {
+    background-color: #fff;
+    color: #8B4513;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+/* Carousel Styles */
+.designs-carousel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-slides {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-image.active {
+    opacity: 1;
+}
+
+.carousel-arrow {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/*FAQ Styles*/
+
+.faq-section {
+    padding: 80px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.faq-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.faq-toggle {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 0;
+    margin-left: 20px;
+}
+
+.faq-toggle.active {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 20px;
+}
+
+.faq-answer.active {
+    max-height: 200px;
+    padding: 0 20px 20px;
+}
+
+.faq-answer p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Hover effects */
+.faq-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faq-question:hover {
+    color: #8B4513;
+}
+
+/*Trial section designs*/
+.trial-section {
+    padding: 80px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.trial-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.trial-text {
+    flex: 1;
+    text-align: center;
+    max-width: 500px;
+}
+
+.trial-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 32px;
+}
+
+.trial-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.email-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+.get-started-btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #8B4513;
+    color: beige;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: #fff;
+    color: #8B4513;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+}
+
+.trial-image {
+    flex: 1;
+    max-width: 500px;
+}
+
+.trial-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .trial-content {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .trial-image {
+        order: -1;
+    }
+
+    .trial-title {
+        font-size: 32px;
+    }
+}
