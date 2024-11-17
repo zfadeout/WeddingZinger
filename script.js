@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Sticky Navigation functionality
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('#sticky-nav a');
 
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Populate tables
+    // Populate pricing tables
     function populateSingleTable() {
         const tbody = document.querySelector('#single-table tbody');
         for (let i = 1; i <= 10; i++) {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 1; i <= 10; i++) {
             const people = i * 50;
             let price = 100 * i;
-            if (i > 5) price = Math.round(price * 0.9); // 10% discount for higher tiers
+            if (i > 5) price = Math.round(price * 0.9);
             const row = `<tr>
                 <td>Up to ${people} people w/ mailing</td>
                 <td>$${price} per year</td>
@@ -65,21 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
     populateSingleTable();
     populateUnlimitedTable();
 
-    // New code for language switcher
+    // Language switcher functionality
     const languageDropdown = document.getElementById('language-dropdown');
     
     if (languageDropdown) {
         languageDropdown.addEventListener('change', function() {
             const selectedLanguage = this.value;
-            // Here you would implement the logic to change the website's language
             console.log(`Language changed to: ${selectedLanguage}`);
-            // For demonstration purposes, we'll just update the dropdown label
             this.options[this.selectedIndex].text = this.options[this.selectedIndex].text;
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
+    // Carousel functionality
     const slides = document.querySelectorAll('.carousel-image');
     const prevButton = document.querySelector('.prev-arrow');
     const nextButton = document.querySelector('.next-arrow');
@@ -101,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }
 
-    // Auto-advance slides every 5 seconds
     function startSlideShow() {
         slideInterval = setInterval(nextSlide, 5000);
     }
@@ -111,22 +108,21 @@ document.addEventListener('DOMContentLoaded', function() {
         startSlideShow();
     }
 
-    // Event listeners for arrows
-    nextButton.addEventListener('click', () => {
-        nextSlide();
-        resetInterval();
-    });
+    if (nextButton && prevButton) {
+        nextButton.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
 
-    prevButton.addEventListener('click', () => {
-        prevSlide();
-        resetInterval();
-    });
+        prevButton.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
 
-    // Start the slideshow
-    startSlideShow();
-});
+        startSlideShow();
+    }
 
-document.addEventListener('DOMContentLoaded', function() {
+    // FAQ functionality
     const faqItems = document.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
@@ -137,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         question.addEventListener('click', () => {
             const isActive = toggle.classList.contains('active');
             
-            // Close all other answers
             document.querySelectorAll('.faq-toggle.active').forEach(activeToggle => {
                 if (activeToggle !== toggle) {
                     activeToggle.classList.remove('active');
@@ -145,9 +140,227 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Toggle current answer
             toggle.classList.toggle('active');
             answer.classList.toggle('active');
         });
     });
+
+    // Add Contacts functionality
+    function initializeAddContacts() {
+        const addContactsBtn = document.querySelector('.add-contacts-btn');
+        const contactsPopup = document.getElementById('contactsPopup');
+        const closePopupBtn = document.querySelector('.close-popup');
+
+        function openPopup() {
+            contactsPopup.classList.add('active');
+        }
+
+        function closePopup() {
+            contactsPopup.classList.remove('active');
+        }
+
+        // Function to update additional people fields
+        function updateAdditionalPeople(size) {
+            const additionalPeopleContainer = document.querySelector('.additional-people');
+            if (!additionalPeopleContainer) return;
+            
+            additionalPeopleContainer.innerHTML = '';
+
+            for (let i = 2; i <= size; i++) {
+                const personHTML = `
+                    <div class="additional-person">
+                        <div class="person-header">
+                            <h3>Person ${i}</h3>
+                            <a href="#" class="remove-person">Remove</a>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-field">
+                                <label class="input-label">First Name</label>
+                                <input type="text" class="input-control">
+                            </div>
+                            <div class="input-field">
+                                <label class="input-label">Last Name</label>
+                                <input type="text" class="input-control">
+                            </div>
+                        </div>
+                        <a href="#" class="add-contact-info">+ Email/Phone</a>
+                    </div>
+                `;
+                additionalPeopleContainer.innerHTML += personHTML;
+            }
+
+            // Add event listeners for remove buttons
+            const removeButtons = additionalPeopleContainer.querySelectorAll('.remove-person');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const person = button.closest('.additional-person');
+                    person.remove();
+                    
+                    // Update group size select
+                    const currentSize = additionalPeopleContainer.querySelectorAll('.additional-person').length + 1;
+                    const groupSizeSelect = document.querySelector('.group-size-select');
+                    if (groupSizeSelect) {
+                        groupSizeSelect.value = currentSize.toString();
+                    }
+                });
+            });
+        }
+
+        if (addContactsBtn && closePopupBtn) {
+            addContactsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openPopup();
+            });
+
+            closePopupBtn.addEventListener('click', closePopup);
+
+            document.addEventListener('click', (e) => {
+                if (!contactsPopup.contains(e.target) && e.target !== addContactsBtn) {
+                    closePopup();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closePopup();
+                }
+            });
+
+            // New Contact Form Creation
+            const newContactOption = contactsPopup.querySelector('.popup-content li:first-child');
+            const overlay = document.createElement('div');
+            overlay.className = 'contact-form-overlay';
+            
+            const formHTML = `
+                <div class="contact-form-popup">
+                    <button class="close-form">&times;</button>
+                    
+                    <div class="contact-form-header">
+                        <h2 class="contact-form-title">Add a New Contact</h2>
+                        <a href="#" class="show-advanced">Show Advanced</a>
+                    </div>
+                    
+                    <div class="contact-type-selector">
+                        <label class="type-option">
+                            <input type="radio" name="contact-type" value="individual" checked>
+                            <span>Individual - A single person</span>
+                        </label>
+                        <label class="type-option">
+                            <input type="radio" name="contact-type" value="couple">
+                            <span>Couple or Family - Multiple people tied to a contact</span>
+                            <span class="help-icon" title="Add multiple people under one contact">?</span>
+                        </label>
+                    </div>
+
+                    <div class="couple-family-fields">
+                        <div class="group-size-field">
+                            <label class="group-size-label">Group Size</label>
+                            <select class="group-size-select">
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        
+                        <div class="greeting-field">
+                            <label class="greeting-label">Couple/Family Greeting</label>
+                            <textarea class="greeting-textarea" placeholder="Enter greeting..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-field">
+                            <label class="input-label">First Name</label>
+                            <input type="text" class="input-control">
+                        </div>
+                        <div class="input-field">
+                            <label class="input-label">Last Name</label>
+                            <input type="text" class="input-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-field">
+                            <label class="input-label">Email</label>
+                            <input type="email" class="input-control">
+                        </div>
+                        <div class="input-field">
+                            <label class="input-label">Phone</label>
+                            <input type="tel" class="input-control">
+                        </div>
+                    </div>
+
+                    <div class="additional-people"></div>
+                    
+                    <div class="form-footer">
+                        <button class="btn btn-secondary">Save and Add Another</button>
+                        <button class="btn btn-primary">Add Contact</button>
+                    </div>
+                </div>
+            `;
+            
+            overlay.innerHTML = formHTML;
+            document.body.appendChild(overlay);
+            
+            // New Contact Form Event Handlers
+            newContactOption.addEventListener('click', () => {
+                closePopup();
+                overlay.classList.add('active');
+            });
+            
+            const closeFormBtn = overlay.querySelector('.close-form');
+            closeFormBtn.addEventListener('click', () => {
+                overlay.classList.remove('active');
+            });
+            
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+
+            // Contact type change handler
+            const contactTypeInputs = overlay.querySelectorAll('input[name="contact-type"]');
+            contactTypeInputs.forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const coupleFamilyFields = overlay.querySelector('.couple-family-fields');
+                    if (e.target.value === 'couple') {
+                        coupleFamilyFields.classList.add('active');
+                        updateAdditionalPeople(2); // Initialize with 2 people
+                    } else {
+                        coupleFamilyFields.classList.remove('active');
+                        const additionalPeopleContainer = overlay.querySelector('.additional-people');
+                        if (additionalPeopleContainer) {
+                            additionalPeopleContainer.innerHTML = '';
+                        }
+                    }
+                });
+            });
+
+            // Group size change handler
+            const groupSizeSelect = overlay.querySelector('.group-size-select');
+            if (groupSizeSelect) {
+                groupSizeSelect.addEventListener('change', (e) => {
+                    const size = parseInt(e.target.value);
+                    updateAdditionalPeople(size);
+                });
+            }
+
+            // Show Advanced handler
+            const showAdvancedLink = overlay.querySelector('.show-advanced');
+            if (showAdvancedLink) {
+                showAdvancedLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('Show advanced options clicked');
+                    // Add your show advanced functionality here
+                });
+            }
+        }
+    }
+
+    // Initialize Add Contacts functionality
+    initializeAddContacts();
 });

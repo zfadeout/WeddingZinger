@@ -1,4 +1,4 @@
-body, html {
+body,html {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
@@ -753,4 +753,531 @@ tbody::-webkit-scrollbar-thumb:hover {
     .trial-title {
         font-size: 32px;
     }
+}
+
+/* Add Contacts Button Styling */
+.add-contacts-wrapper {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    z-index: 100;
+}
+
+.add-contacts-btn {
+    padding: 12px 24px;
+    background-color: #8B4513;
+    color: beige;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.5px;
+}
+
+.add-contacts-btn:hover {
+    background-color: #fff;
+    color: #8B4513;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Enhanced Popup Styling */
+.contacts-popup {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    width: 360px; /* Increased width */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e0e0e0;
+}
+
+.contacts-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px; /* Increased padding */
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 12px 12px 0 0;
+    background-color: #f8f8f8;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 18px; /* Increased font size */
+    color: #333;
+    font-weight: 600;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.5px;
+}
+
+.close-popup {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    font-size: 20px;
+}
+
+.close-popup:hover {
+    background-color: #eee;
+    color: #333;
+}
+
+.popup-content {
+    max-height: 450px; /* Increased height */
+    overflow-y: auto;
+    padding: 12px 0;
+}
+
+/* Improved list styling */
+.popup-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popup-content li {
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    background: transparent;
+    border: none;
+    letter-spacing: 0.3px;
+}
+
+.popup-content li:hover {
+    background-color: #f8f8f8;
+    color: #8B4513;
+    padding-left: 28px;
+}
+
+/* Side indicator on hover */
+.popup-content li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 0;
+    background-color: #8B4513;
+    transition: height 0.2s ease;
+}
+
+.popup-content li:hover::before {
+    height: 100%;
+}
+
+/* Icons within list items */
+.popup-content li img {
+    width: 18px;
+    height: 18px;
+    margin-right: 14px;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.popup-content li:hover img {
+    opacity: 1;
+}
+
+/* Remove default styling from list items */
+.popup-content li:focus {
+    outline: none;
+    background-color: #f8f8f8;
+}
+
+.popup-content li * {
+    border: none;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: inherit;
+}
+
+/* Scrollbar Styling */
+.popup-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .contacts-popup {
+        width: 320px;
+        right: 20px;
+    }
+
+    .popup-content li {
+        padding: 16px 20px;
+    }
+
+    .popup-content li:hover {
+        padding-left: 24px;
+    }
+}
+
+/* New Contact Form Popup */
+.contact-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-form-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contact-form-popup {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    position: relative;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.contact-form-overlay.active .contact-form-popup {
+    transform: translateY(0);
+}
+
+.contact-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.show-advanced {
+    color: #8B4513;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.show-advanced:hover {
+    opacity: 0.8;
+}
+
+.contact-type-selector {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.type-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.type-option input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #8B4513;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.type-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #8B4513;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.type-option label {
+    font-size: 15px;
+    color: #555;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 24px;
+}
+
+.input-field {
+    width: 100%;
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.input-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.input-control:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #8B4513;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #734010;
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+.close-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.close-form:hover {
+    color: #333;
+}
+
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 12px;
+    margin-left: 6px;
+    cursor: help;
+}
+
+/* New styles for family/couple specific fields */
+.couple-family-fields {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    margin-bottom: 24px;
+}
+
+.couple-family-fields.active {
+    display: block;
+    opacity: 1;
+}
+
+.group-size-field {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+.group-size-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.group-size-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    appearance: none;
+    background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M7%2010L0%200h14z%22%2F%3E%3C%2Fsvg%3E") right 10px center no-repeat;
+    background-size: 10px;
+    cursor: pointer;
+}
+
+.group-size-select:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+.greeting-field {
+    margin-bottom: 24px;
+}
+
+.greeting-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.greeting-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.greeting-textarea:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+/* Adjust spacing for form elements */
+.input-field {
+    margin-bottom: 8px;
+}
+
+.input-control {
+    padding: 12px 16px; /* Increased padding */
+}
+
+/* Additional person fields */
+.additional-person {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.person-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.remove-person {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.remove-person:hover {
+    color: #d32f2f;
+}
+
+.add-contact-info {
+    color: #8B4513;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.add-contact-info:hover {
+    text-decoration: underline;
 }
