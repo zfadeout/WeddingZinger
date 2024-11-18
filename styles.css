@@ -975,6 +975,8 @@ tbody::-webkit-scrollbar-thumb:hover {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    overflow-y: auto; /* Enable scrolling on overlay */
+    padding: 40px 20px; /* Add padding to ensure content doesn't touch edges */
 }
 
 .contact-form-overlay.active {
@@ -992,6 +994,11 @@ tbody::-webkit-scrollbar-thumb:hover {
     position: relative;
     transform: translateY(-20px);
     transition: all 0.3s ease;
+    max-height: 90vh; /* Maximum height relative to viewport */
+    overflow-y: auto; /* Enable scrolling within popup */
+    margin: auto; /* Center in viewport */
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-form-overlay.active .contact-form-popup {
@@ -999,10 +1006,13 @@ tbody::-webkit-scrollbar-thumb:hover {
 }
 
 .contact-form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 20px 0;
     margin-bottom: 24px;
+    z-index: 1;
+    border-bottom: 1px solid #eee;
 }
 
 .contact-form-title {
@@ -1010,6 +1020,24 @@ tbody::-webkit-scrollbar-thumb:hover {
     font-size: 24px;
     color: #333;
     margin: 0;
+}
+
+.contact-form-popup::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contact-form-popup::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.contact-form-popup::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.contact-form-popup::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .show-advanced {
@@ -1097,10 +1125,15 @@ tbody::-webkit-scrollbar-thumb:hover {
 }
 
 .form-footer {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
     display: flex;
     justify-content: flex-end;
     gap: 16px;
-    margin-top: 30px;
 }
 
 .btn {
@@ -1133,16 +1166,18 @@ tbody::-webkit-scrollbar-thumb:hover {
 }
 
 .close-form {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #666;
-    cursor: pointer;
-    padding: 4px;
-    line-height: 1;
+    background: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
 }
 
 .close-form:hover {
@@ -1248,6 +1283,10 @@ tbody::-webkit-scrollbar-thumb:hover {
     margin-top: 20px;
 }
 
+.additional-people {
+    margin-bottom: 60px; /* Add space for fixed footer */
+}
+
 .person-header {
     display: flex;
     justify-content: space-between;
@@ -1280,4 +1319,20 @@ tbody::-webkit-scrollbar-thumb:hover {
 
 .add-contact-info:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .contact-form-overlay {
+        padding: 20px;
+    }
+    
+    .contact-form-popup {
+        padding: 20px;
+        max-height: 85vh;
+    }
+    
+    .form-group {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }
