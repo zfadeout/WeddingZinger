@@ -159,6 +159,24 @@ document.addEventListener('DOMContentLoaded', function() {
             contactsPopup.classList.remove('active');
         }
 
+        // Function to create email/phone fields
+        function createContactInfoFields() {
+            return `
+                <div class="contact-info-fields">
+                    <div class="form-group">
+                        <div class="input-field">
+                            <label class="input-label">Email</label>
+                            <input type="email" class="input-control">
+                        </div>
+                        <div class="input-field">
+                            <label class="input-label">Phone</label>
+                            <input type="tel" class="input-control">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // Function to update additional people fields
         function updateAdditionalPeople(size) {
             const additionalPeopleContainer = document.querySelector('.additional-people');
@@ -183,7 +201,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <input type="text" class="input-control">
                             </div>
                         </div>
-                        <a href="#" class="add-contact-info">+ Email/Phone</a>
+                        <div class="contact-info-container">
+                            ${createContactInfoFields()}
+                        </div>
+                        <a href="#" class="add-contact-info">+ Additional Email/Phone</a>
                     </div>
                 `;
                 additionalPeopleContainer.innerHTML += personHTML;
@@ -203,6 +224,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (groupSizeSelect) {
                         groupSizeSelect.value = currentSize.toString();
                     }
+                });
+            });
+
+            // Add event listeners for "Additional Email/Phone" buttons
+            const addContactInfoButtons = additionalPeopleContainer.querySelectorAll('.add-contact-info');
+            addContactInfoButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const contactInfoContainer = button.previousElementSibling;
+                    const newFields = createContactInfoFields();
+                    // Create a wrapper div for the new fields
+                    const wrapper = document.createElement('div');
+                    wrapper.innerHTML = newFields;
+                    // Add remove button for additional contact info
+                    const removeButton = document.createElement('a');
+                    removeButton.href = '#';
+                    removeButton.className = 'remove-contact-info';
+                    removeButton.textContent = 'Remove';
+                    wrapper.querySelector('.contact-info-fields').appendChild(removeButton);
+                    
+                    contactInfoContainer.appendChild(wrapper);
+
+                    // Add event listener for the remove button
+                    removeButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        wrapper.remove();
+                    });
                 });
             });
         }
